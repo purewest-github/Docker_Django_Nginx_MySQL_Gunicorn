@@ -6,7 +6,7 @@ services:
     container_name: mysql
     build:
       context: .
-      dockerfile: containers/mysql/Dockerfile
+      dockerfile: Docker/mysql/Dockerfile
     platform: linux/x86_64
     volumes:
       - db_data:/var/lib/mysql
@@ -19,7 +19,7 @@ services:
     container_name: app
     build:
       context: .
-      dockerfile: containers/django/Dockerfile
+      dockerfile: Docker/django/Dockerfile
     volumes:
       - .:/code
       - ./static:/static
@@ -43,7 +43,7 @@ services:
     build:
       # ビルドコンテキストはカレントディレクトリ
       context: .
-      dockerfile: containers/nginx/Dockerfile
+      dockerfile: Docker/nginx/Dockerfile
     # ボリュームを指定
     # ローカルの/staticをコンテナの/staticにマウントする
     volumes:

@@ -10,7 +10,7 @@ services:
     build:
       # ビルドコンテキストはカレントディレクトリ
       context: .
-      dockerfile: containers/mysql/Dockerfile
+      dockerfile: Docker/mysql/Dockerfile
     # M1チップでも動くように
     # Intel Macの場合あってもなくても動く
     platform: linux/x86_64
@@ -33,7 +33,7 @@ services:
     build:
       # ビルドコンテキストはカレントディレクトリ
       context: .
-      dockerfile: containers/django/Dockerfile
+      dockerfile: Docker/django/Dockerfile
     # ボリュームを指定
     # ローカルのカレントディレクトリをコンテナの/codeにマウントする
     # ローカルの/staticをコンテナの/staticにマウントする
