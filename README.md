@@ -2,18 +2,19 @@
 Docker + Django + Nginx + MySQL + Gunicorn
 
 
+# 1.docker-compose.ymlと同じ階層に「Django_App」ディレクトリを作成
+# 2.docker-compose.ymlと同じ階層に「.env」ファイルを作成し記述
 
+# 3.プロジェクトを新規作成
 ```
-# プロジェクトを新規作成
-# docker-compose -f <指定するdocker-composeのファイル> run app django-admin startproject <プロジェクト名> <プロジェクトを作成するディレクトリ>
 
 # 例：
-docker-compose -f docker-compose.prod.yml run app django-admin startproject djangopj .
+docker-compose run app django-admin startproject [プロジェクト名] .
 ```
 
 
 
-## settings.py
+# 4. settings.pyを編集
 ```
 from pathlib import Path
 # osのモジュールをインポート
@@ -49,9 +50,9 @@ DATABASES = {
 # [・・・]
 
 # 言語を日本語に設定
-LANGUAGE_CODE = ja
+LANGUAGE_CODE = 'ja'
 # タイムゾーンをAsia/Tokyoに設定
-TIME_ZONE = Asia/Tokyo
+TIME_ZONE = 'Asia/Tokyo'
 
 # [・・・]
 
@@ -61,3 +62,27 @@ STATIC_ROOT = "/static/"
 STATIC_URL = "/static/"
 ```
 
+
+# 5.一旦Dockerをリセットする
+```
+docker-compose down -v
+
+docker rm $(docker ps -a -q)
+
+docker rmi $(docker images -q)
+
+docker system prune
+```
+
+# 6.Dockerを起動
+```
+docker-compose up -d --build
+```
+
+# 7.ブラウザで確認
+```
+http://localhost:8000
+```
+
+# 8.Django_App内で環境を作って開発して行く
+# 9.そこからappを作成して下さい

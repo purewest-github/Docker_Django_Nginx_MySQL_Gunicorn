@@ -38,7 +38,7 @@ services:
     # ローカルのカレントディレクトリをコンテナの/codeにマウントする
     # ローカルの/staticをコンテナの/staticにマウントする
     volumes:
-      - ./Django:/code
+      - ./Django_App:/code
       - ./static:/static
     # ローカルの8000番ポートとコンテナの8000番ポートをつなぐ
     ports:
@@ -64,7 +64,7 @@ services:
     env_file:
       - ./.env
     links:
-      - mysql
+      - db
     ports:
       - 4000:80
     volumes:

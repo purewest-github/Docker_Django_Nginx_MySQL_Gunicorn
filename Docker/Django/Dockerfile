@@ -10,9 +10,9 @@ RUN mkdir /code
 # コンテナのワークディレクトリを/codeに指定
 WORKDIR /code
 # ローカルのrequirements.txtをコンテナの/codeフォルダ直下に置く
-COPY ./Django_App/requirements.txt /code/
+COPY requirements.txt /code/
 # コンテナ内でpip install -r requirements.txtを実行
-RUN pip install upgrade pip && \
+RUN pip install -U pip && \
     pip install -r requirements.txt
 # ソースコードをコンテナにコピー
-COPY ./Django_App /code/
+COPY Django_App/ /code/
