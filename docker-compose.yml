@@ -10,7 +10,7 @@ services:
     build:
       # ビルドコンテキストはカレントディレクトリ
       context: .
-      dockerfile: Docker/mysql/Dockerfile
+      dockerfile: Docker/MySQL/Dockerfile
     # M1チップでも動くように
     # Intel Macの場合あってもなくても動く
     platform: linux/x86_64
@@ -33,12 +33,12 @@ services:
     build:
       # ビルドコンテキストはカレントディレクトリ
       context: .
-      dockerfile: Docker/django/Dockerfile
+      dockerfile: Docker/Django/Dockerfile
     # ボリュームを指定
     # ローカルのカレントディレクトリをコンテナの/codeにマウントする
     # ローカルの/staticをコンテナの/staticにマウントする
     volumes:
-      - .:/code
+      - ./Django:/code
       - ./static:/static
     # ローカルの8000番ポートとコンテナの8000番ポートをつなぐ
     ports:
@@ -57,6 +57,18 @@ services:
       db:
         # dbのヘルスチェックが終わってからappを起動させる
         condition: service_healthy
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    # コンテナ内の環境変数を.envを使って設定
+    env_file:
+      - ./.env
+    links:
+      - mysql
+    ports:
+      - 4000:80
+    volumes:
+      - ./phpmyadmin/sessions:/sessions
         
 volumes:
   db_data:
